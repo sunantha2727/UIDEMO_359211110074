@@ -5,17 +5,16 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class dbConnection {
-    private static final String SQCONN = "jdbc:school.sqlite";
+    private static  final String SQCONN="jdbc:sqlite:schoo.sqlite";
+
     public static Connection getConnection() throws SQLException {
         try {
             Class.forName("org.sqlite.JDBC");
             return DriverManager.getConnection(SQCONN);
-
-        }//try
-             catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         }
         return null;
-    }//getConnection
+    }//getconnection
 
-}
+}//class
