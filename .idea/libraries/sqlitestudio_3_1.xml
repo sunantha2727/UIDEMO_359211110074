@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="jfoenix-8.0.1">
+  <library name="sqlitestudio-3.1">
     <CLASSES>
-      <root url="jar://D:/oop software/jfoenix-8.0.1.jar!/" />
+      <root url="file://D:/oop software/sqlitestudio-3.1.1" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

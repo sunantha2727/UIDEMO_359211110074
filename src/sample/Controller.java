@@ -1,17 +1,25 @@
 package sample;
 
+import Admin.adminControlloer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
-    private  loginModel model = new loginModel();
-    //import object from scence builder
+    private loginModel model = new loginModel();
+    //import object from scene builder
     @FXML
     private Label dbStatus;
     @FXML
@@ -26,28 +34,50 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (this.model.isDatabaseConnection()) {
-            this.dbStatus.setText("Connectec to DB");
+            this.dbStatus.setText("Connected to DB");
         } else {
             this.dbStatus.setText("Not Connect to DB");
         }
-    }
+
+    }//initialize
+
     @FXML
-    public void Login (ActionEvent event){
+    public  void Login(ActionEvent event){
 //        System.out.println(username.getText());
 //        System.out.println(password.getText());
 
-        try{
-            if (this.model.isLogin(username.getText(), password.getText())){
+        try {
+            if (this.model.isLogin(username.getText(), password.getText())) {
                 Stage stage = (Stage) this.btnLogin.getScene().getWindow();
-                //stage.close();
-                loginStatus.setText("Welcome to Our System");
-
-            }else {
-                loginStatus.setText("Your username or password is invalid");
+                stage.close();
+                //loginStatus.setText("Welcome to Our System");
+                adminDashBoard();
+            } else {
+                loginStatus.setText("Your username or password is invalid.");
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }//Login
+
+    private void adminDashBoard() {
+        try {
+            Stage adminstage = new Stage();
+            FXMLLoader loader = new FXMLLoader();
+            Pane root = (Pane) loader.load(getClass().getResource("/admin/adminDashBoard.fxml").openStream());
+            adminControlloer admincontroller = new adminControlloer();
+
+            Scene scene = new Scene(root);
+            adminstage.setScene(scene);
+            adminstage.setResizable(false);
+            adminstage.setTitle("DashBoard");
+            adminstage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+
+
+    }
 
 }//class
